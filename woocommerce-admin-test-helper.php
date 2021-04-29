@@ -15,7 +15,7 @@ define( 'WC_ADMIN_TEST_HELPER_PLUGIN_FILE', 'woocommerce-admin-test-helper/wooco
 /**
  * Register the JS.
  */
-function add_extension_register_script() {
+function add_wc_admin_helper_extension_register_script() {
 	$script_path       = '/build/index.js';
 	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
 	$script_asset      = file_exists( $script_asset_path )
@@ -30,6 +30,10 @@ function add_extension_register_script() {
 		$script_asset['version'],
 		true
 	);
+	$inline_config = array(
+		'taskNumber' => get_option('woocommerce_admin_test_helper_task_number')
+	);
+	wp_add_inline_script( 'woocommerce-admin-test-helper', 'window.wcAdminTestHelperConfig = ' . wp_json_encode( $inline_config ), 'before' );
 	wp_enqueue_script( 'woocommerce-admin-test-helper' );
 
 	$css_file_version = filemtime( dirname( __FILE__ ) . '/build/index.css' );
@@ -54,7 +58,7 @@ function add_extension_register_script() {
 	wp_enqueue_style( 'woocommerce-admin-test-helper' );
 }
 
-add_action( 'admin_enqueue_scripts', 'add_extension_register_script' );
+add_action( 'admin_enqueue_scripts', 'add_wc_admin_helper_extension_register_script' );
 
 // Load the plugin
 require( 'plugin.php' );

@@ -9,6 +9,7 @@ import { applyFilters } from '@wordpress/hooks';
  */
 import { AdminNotes } from '../admin-notes';
 import { default as Tools } from '../tools';
+import { Tasks } from '../tasks';
 import { default as Options } from '../options';
 
 const tabs = applyFilters( 'woocommerce_admin_test_helper_tabs', [
@@ -27,7 +28,12 @@ const tabs = applyFilters( 'woocommerce_admin_test_helper_tabs', [
 		title: 'Tools',
 		content: <Tools />,
 	},
-] );
+	{
+		name: 'tasks',
+		title: 'Tasks',
+		content: <Tasks />,
+	},
+]);
 
 export function App() {
 	return (
