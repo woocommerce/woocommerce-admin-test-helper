@@ -1,0 +1,13 @@
+.woocommerce-admin-test-helper_task-container {
+    display: flex;
+    align-items: center;
+
+    .components-input-control {
+        width: 100px;
+        margin: 0px 8px;
+    }
+
+    > span {
+        margin: 0px 8px;
+    }
+}

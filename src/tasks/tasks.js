@@ -1,10 +1,15 @@
 /**
- * Internal dependencies.
+ * External dependencies.
  */
 import { useDispatch, useSelect } from "@wordpress/data";
 import { __experimentalNumberControl as NumberControl, Button } from "@wordpress/components";
 import { useState, useEffect } from '@wordpress/element';
 import { OPTIONS_STORE_NAME } from '@woocommerce/data';
+
+/**
+ * Internal dependencies
+ */
+import "./tasks.scss";
 
 const OPTION_NAME = 'woocommerce_admin_test_helper_task_number';
 export const Tasks = () => {
@@ -39,19 +44,21 @@ export const Tasks = () => {
         <>
             <h2>Tasks</h2>
             <p>This section contains tools for managing tasks in the task list.</p>
-            <div>
+            <div className="woocommerce-admin-test-helper_task-container">
                 <label>Task number: </label>
-                {editTaskNumber ? <><NumberControl
+                {editTaskNumber ? <>
+                  <NumberControl
                     value={taskNumberInput}
                     onChange={setTaskNumberInput}
                     max={10}
-                />
-                    <Button disabled={taskNumber === taskNumberInput} onClick={updateTaskNumber}>Update</Button>
+                  />
+                  <Button isSecondary disabled={parseInt(taskNumber, 10) === taskNumberInput} onClick={updateTaskNumber}>Update</Button>
                 </>
                 : <>
-                  <span>{isRequesting ? '': taskNumber}</span><Button onClick={() => setEditTaskNumber(true)}>Edit</Button>
+                    <span>{isRequesting ? '': taskNumber}</span>
+                    <Button isPrimary onClick={() => setEditTaskNumber(true)}>Edit</Button>
                   </>
-                  }
+                }
             </div>
         </>
     );
