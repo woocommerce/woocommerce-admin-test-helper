@@ -9,10 +9,10 @@ import { applyFilters } from '@wordpress/hooks';
  */
 import { AdminNotes } from '../admin-notes';
 import { default as Tools } from '../tools';
-import { Tasks } from '../tasks';
+import { ExtendedTasks } from '../extended-tasks';
 import { default as Options } from '../options';
 
-const tabs = applyFilters( 'woocommerce_admin_test_helper_tabs', [
+const tabs = applyFilters('woocommerce_admin_test_helper_tabs', [
 	{
 		name: 'options',
 		title: 'Options',
@@ -29,9 +29,9 @@ const tabs = applyFilters( 'woocommerce_admin_test_helper_tabs', [
 		content: <Tools />,
 	},
 	{
-		name: 'tasks',
-		title: 'Tasks',
-		content: <Tasks />,
+		name: 'extended-tasks',
+		title: 'Extended Tasks',
+		content: <ExtendedTasks />,
 	},
 ]);
 
@@ -42,18 +42,18 @@ export function App() {
 			<TabPanel
 				className="woocommerce-admin-test-helper__main-tab-panel"
 				activeClass="active-tab"
-				tabs={ tabs }
-				initialTabName={ tabs[ 0 ].name }
+				tabs={tabs}
+				initialTabName={tabs[0].name}
 			>
-				{ ( tab ) => (
+				{(tab) => (
 					<>
-						{ tab.content }
-						{ applyFilters(
-							`woocommerce_admin_test_helper_tab_${ tab.name }`,
+						{tab.content}
+						{applyFilters(
+							`woocommerce_admin_test_helper_tab_${tab.name}`,
 							[]
-						) }
+						)}
 					</>
-				) }
+				)}
 			</TabPanel>
 		</div>
 	);

@@ -8,7 +8,7 @@ import { render } from '@wordpress/element';
  */
 import { App } from './app';
 import './index.scss';
-import './tasks/add-tasks';
+import './extended-tasks/include-extended-tasks';
 
 const appRoot = document.getElementById(
 	'woocommerce-admin-test-helper-app-root'

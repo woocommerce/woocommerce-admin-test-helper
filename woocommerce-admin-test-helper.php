@@ -31,7 +31,7 @@ function add_wc_admin_helper_extension_register_script() {
 		true
 	);
 	$inline_config = array(
-		'taskNumber' => get_option('woocommerce_admin_test_helper_task_number')
+		'extendedTasks' => json_decode(get_option('woocommerce_admin_test_helper_extended_tasks', '[]'))
 	);
 	wp_add_inline_script( 'woocommerce-admin-test-helper', 'window.wcAdminTestHelperConfig = ' . wp_json_encode( $inline_config ), 'before' );
 	wp_enqueue_script( 'woocommerce-admin-test-helper' );
