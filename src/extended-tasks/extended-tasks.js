@@ -10,8 +10,10 @@ export const ExtendedTasks = () => {
 		<>
 			<h2>Extended Tasks</h2>
 			<p>
-				This section contains tools for managing extended tasks in the
-				task list.
+				This section contains tools for managing extended tasks
+				displayed in the task list.
+				<br /> These tasks are WooCommerce Admin Test helper tasks{' '}
+				<b>only</b>, as we can't edit the default tasks.
 			</p>
 			<ExtendedTaskList />
 			<AddExtendedTask />
