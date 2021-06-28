@@ -105,7 +105,9 @@ export const AddExtendedTask = () => {
 					/>
 					<SelectControl
 						label="Is Completed"
-						onChange={(val) => onValueChange('completed', val)}
+						onChange={(val) =>
+							onValueChange('completed', JSON.parse(val))
+						}
 						labelPosition="side"
 						options={[
 							{ label: 'True', value: true },
@@ -115,7 +117,9 @@ export const AddExtendedTask = () => {
 					/>
 					<SelectControl
 						label="Is dismissable"
-						onChange={(val) => onValueChange('isDismissable', val)}
+						onChange={(val) =>
+							onValueChange('isDismissable', JSON.parse(val))
+						}
 						labelPosition="side"
 						options={[
 							{ label: 'True', value: true },
@@ -126,7 +130,7 @@ export const AddExtendedTask = () => {
 					<SelectControl
 						label="Allow remind me later"
 						onChange={(val) =>
-							onValueChange('allowRemindMeLater', val)
+							onValueChange('allowRemindMeLater', JSON.parse(val))
 						}
 						labelPosition="side"
 						options={[
