@@ -1,0 +1,21 @@
+.woocommerce-admin-test-helper_task-container {
+	display: flex;
+	align-items: center;
+
+	.components-input-control {
+		width: 100px;
+		margin: 0px 8px;
+	}
+
+	> span {
+		margin: 0px 8px;
+	}
+}
+
+.woocommerce-admin-test-helper__add-task {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+}
