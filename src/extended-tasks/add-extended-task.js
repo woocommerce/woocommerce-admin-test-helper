@@ -44,7 +44,10 @@ export const AddExtendedTask = () => {
 		if (!title) {
 			return;
 		}
-		if (extendedTasks.findIndex((task) => task.title === title) !== -1) {
+		if (
+			extendedTasks &&
+			extendedTasks.findIndex((task) => task.title === title) !== -1
+		) {
 			alert(
 				`Task with title - '${title}', already exists, please use a unique one.`
 			);
