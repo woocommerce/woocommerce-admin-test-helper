@@ -1,5 +1,9 @@
 import { TriggerCronJob, TRIGGER_CRON_ACTION_NAME } from './trigger-cron';
 import { WC_COM_TOGGLE_ACTION_NAME, ToggleWCComUrl } from './toggle-wccom-url';
+import {
+	CLEAR_TRANSIENT_ACTION_NAME,
+	ClearTransients,
+} from './clear-transients';
 
 export default [
 	{
@@ -52,5 +56,11 @@ export default [
 		description: <ToggleWCComUrl />,
 		action: WC_COM_TOGGLE_ACTION_NAME,
 		buttonName: 'Toggle',
+	},
+	{
+		command: 'Clear transients',
+		description: <ClearTransients />,
+		action: CLEAR_TRANSIENT_ACTION_NAME,
+		buttonName: 'Clear',
 	},
 ];

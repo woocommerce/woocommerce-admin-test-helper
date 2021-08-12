@@ -55,7 +55,6 @@ export const ToggleWCComUrl = () => {
 		}
 	}, [wcUrl]);
 
-	console.log(enabled);
 	return (
 		<div className="toggle-wccom-url">
 			{loading || updating ? (

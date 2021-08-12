@@ -8,7 +8,7 @@ import { dispatch } from '@wordpress/data';
  * Internal dependencies
  */
 import TYPES from './action-types';
-import { API_NAMESPACE } from './constants';
+import { API_NAMESPACE, STORE_KEY } from './constants';
 import { STORE_KEY as OPTIONS_STORE_KEY } from '../../options/data/constants';
 
 export function addCurrentlyRunning(command) {
@@ -61,6 +61,13 @@ export function setCronJobs(cronJobs) {
 	return {
 		type: TYPES.SET_CRON_JOBS,
 		cronJobs,
+	};
+}
+
+export function setTransients(transients) {
+	return {
+		type: TYPES.SET_TRANSIENTS,
+		transients,
 	};
 }
 
@@ -189,4 +196,19 @@ export function* runWCComToggle(params) {
 			'getOption'
 		);
 	});
+}
+
+export function* clearTransient(params) {
+	if (params && params.transient) {
+		yield runCommand('Clear selected transient', function* () {
+			yield apiFetch({
+				path: API_NAMESPACE + '/tools/clear-selected-transient/v1',
+				method: 'POST',
+				data: params,
+			});
+			yield dispatch(STORE_KEY).invalidateResolutionForStoreSelector(
+				'getTransients'
+			);
+		});
+	}
 }

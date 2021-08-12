@@ -34,3 +34,4 @@ require( 'tools/run-wc-admin-daily.php' );
 require( 'options/rest-api.php' );
 require( 'tools/delete-all-products.php' );
 require( 'tools/toggle-wccom-url-overwrite.php' );
+require( 'tools/clear-wc-admin-transients.php' );

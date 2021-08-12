@@ -61,6 +61,11 @@ const reducer = (state = DEFAULT_STATE, action) => {
 				...state,
 				cronJobs: action.cronJobs,
 			};
+		case TYPES.SET_TRANSIENTS:
+			return {
+				...state,
+				transients: action.transients,
+			};
 		case TYPES.ADD_COMMAND_PARAMS:
 			return {
 				...state,
