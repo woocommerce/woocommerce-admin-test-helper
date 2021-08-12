@@ -12,23 +12,23 @@ import { default as commands } from './commands';
 import { STORE_KEY } from './data/constants';
 import './data';
 
-function Tools( { actions, currentlyRunningCommands, messages, comandParams } ) {
+function Tools({ actions, currentlyRunningCommands, messages, comandParams }) {
 	actions = actions();
 	return (
 		<div id="wc-admin-test-helper-tools">
 			<h2>Tools</h2>
 			<p>This section contains miscellaneous tools.</p>
-			{ Object.keys( messages ).map( ( key ) => {
+			{Object.keys(messages).map((key) => {
 				return (
 					<Notice
-						status={ messages[ key ].status }
-						key={ key }
-						isDismissible={ false }
+						status={messages[key].status}
+						key={key}
+						isDismissible={false}
 					>
-						{ key }: { messages[ key ].message }
+						{key}: {messages[key].message}
 					</Notice>
 				);
-			} ) }
+			})}
 			<table className="tools wp-list-table striped table-view-list widefat">
 				<thead>
 					<tr>
@@ -38,28 +38,35 @@ function Tools( { actions, currentlyRunningCommands, messages, comandParams } ) 
 					</tr>
 				</thead>
 				<tbody>
-					{ commands.map( ( { action, command, description }, index ) => {
-						const params = comandParams[ action ] ?? false;
-						return (
-							<tr key={ index }>
-								<td className="command">{ command }</td>
-								<td>{ description }</td>
-								<td>
-									<Button
-										onClick={ () => actions[ action ]( params ) }
-										disabled={
-											currentlyRunningCommands[
-												command
-											]
-										}
-										isPrimary
-									>
-										Run
-									</Button>
-								</td>
-							</tr>
-						);
-					} ) }
+					{commands.map(
+						(
+							{ action, command, description, buttonName },
+							index
+						) => {
+							const params = comandParams[action] ?? false;
+							return (
+								<tr key={index}>
+									<td className="command">{command}</td>
+									<td>{description}</td>
+									<td>
+										<Button
+											onClick={() =>
+												actions[action](params)
+											}
+											disabled={
+												currentlyRunningCommands[
+													command
+												]
+											}
+											isPrimary
+										>
+											{buttonName || 'Run'}
+										</Button>
+									</td>
+								</tr>
+							);
+						}
+					)}
 				</tbody>
 			</table>
 		</div>
@@ -67,21 +74,22 @@ function Tools( { actions, currentlyRunningCommands, messages, comandParams } ) 
 }
 
 export default compose(
-	withSelect( ( select ) => {
-		const { getCurrentlyRunning, getMessages, getCommandParams } = select( STORE_KEY );
+	withSelect((select) => {
+		const { getCurrentlyRunning, getMessages, getCommandParams } =
+			select(STORE_KEY);
 		return {
 			currentlyRunningCommands: getCurrentlyRunning(),
 			messages: getMessages(),
 			comandParams: getCommandParams(),
 		};
-	} ),
-	withDispatch( ( dispatch ) => {
+	}),
+	withDispatch((dispatch) => {
 		const actions = function () {
-			return dispatch( STORE_KEY );
+			return dispatch(STORE_KEY);
 		};
 
 		return {
 			actions,
 		};
-	} )
-)( Tools );
+	})
+)(Tools);

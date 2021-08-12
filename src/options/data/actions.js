@@ -14,40 +14,47 @@ import { API_NAMESPACE } from './constants';
  *
  * @param {Array} options
  */
-export function setOptions( options ) {
+export function setOptions(options) {
 	return {
 		type: TYPES.SET_OPTIONS,
 		options,
 	};
 }
 
-export function setLoadingState( isLoading ) {
+export function setOption(option) {
+	return {
+		type: TYPES.SET_OPTION,
+		option,
+	};
+}
+
+export function setLoadingState(isLoading) {
 	return {
 		type: TYPES.SET_IS_LOADING,
 		isLoading,
 	};
 }
 
-export function setOptionForEditing( editingOption ) {
+export function setOptionForEditing(editingOption) {
 	return {
 		type: TYPES.SET_OPTION_FOR_EDITING,
 		editingOption,
 	};
 }
 
-export function setNotice( notice ) {
+export function setNotice(notice) {
 	return {
 		type: TYPES.SET_NOTICE,
 		notice,
 	};
 }
 
-export function* deleteOption( optionName ) {
+export function* deleteOption(optionName) {
 	try {
-		yield apiFetch( {
+		yield apiFetch({
 			method: 'DELETE',
-			path: `${ API_NAMESPACE }/options/${ optionName }`,
-		} );
+			path: `${API_NAMESPACE}/options/${optionName}`,
+		});
 		yield {
 			type: TYPES.DELETE_OPTION,
 			optionName,
@@ -57,25 +64,25 @@ export function* deleteOption( optionName ) {
 	}
 }
 
-export function* saveOption( optionName, newOptionValue ) {
+export function* saveOption(optionName, newOptionValue) {
 	try {
 		const payload = {};
-		payload[ optionName ] = JSON.parse( newOptionValue );
-		yield apiFetch( {
+		payload[optionName] = JSON.parse(newOptionValue);
+		yield apiFetch({
 			method: 'POST',
 			path: '/wc-admin/options',
 			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify( payload ),
-		} );
-		yield setNotice( {
+			body: JSON.stringify(payload),
+		});
+		yield setNotice({
 			status: 'success',
 			message: optionName + ' has been saved.',
-		} );
+		});
 	} catch {
-		yield setNotice( {
+		yield setNotice({
 			status: 'error',
 			message: 'Unable to save ' + optionName,
-		} );
+		});
 		throw new Error();
 	}
 }

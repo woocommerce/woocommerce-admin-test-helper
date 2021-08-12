@@ -32,4 +32,5 @@ require( 'tools/trigger-wca-install.php' );
 require( 'tools/trigger-cron-job.php' );
 require( 'tools/run-wc-admin-daily.php' );
 require( 'options/rest-api.php' );
-require( 'tools/delete-all-products.php');
+require( 'tools/delete-all-products.php' );
+require( 'tools/toggle-wccom-url-overwrite.php' );

@@ -2,12 +2,14 @@
  * External dependencies
  */
 import { apiFetch } from '@wordpress/data-controls';
+import { dispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import TYPES from './action-types';
 import { API_NAMESPACE } from './constants';
+import { STORE_KEY as OPTIONS_STORE_KEY } from '../../options/data/constants';
 
 export function addCurrentlyRunning(command) {
 	return {
@@ -173,5 +175,18 @@ export function* runSelectedCronJob(params) {
 			method: 'POST',
 			data: params,
 		});
+	});
+}
+
+export function* runWCComToggle(params) {
+	yield runCommand('Toggle overwriting woocommerce.com url', function* () {
+		yield apiFetch({
+			path: API_NAMESPACE + '/tools/toggle-wccom-url-overwrite/v1',
+			method: 'POST',
+			data: params,
+		});
+		yield dispatch(OPTIONS_STORE_KEY).invalidateResolutionForStoreSelector(
+			'getOption'
+		);
 	});
 }

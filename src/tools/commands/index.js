@@ -1,4 +1,5 @@
 import { TriggerCronJob, TRIGGER_CRON_ACTION_NAME } from './trigger-cron';
+import { WC_COM_TOGGLE_ACTION_NAME, ToggleWCComUrl } from './toggle-wccom-url';
 
 export default [
 	{
@@ -45,5 +46,11 @@ export default [
 		command: 'Run a cron job',
 		description: <TriggerCronJob />,
 		action: TRIGGER_CRON_ACTION_NAME,
+	},
+	{
+		command: 'Toggle woocommerce.com url overwrite',
+		description: <ToggleWCComUrl />,
+		action: WC_COM_TOGGLE_ACTION_NAME,
+		buttonName: 'Toggle',
 	},
 ];

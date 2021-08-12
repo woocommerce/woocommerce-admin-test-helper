@@ -12,17 +12,17 @@ const DEFAULT_STATE = {
 	status: '',
 };
 
-const reducer = ( state = DEFAULT_STATE, action ) => {
-	switch ( action.type ) {
+const reducer = (state = DEFAULT_STATE, action) => {
+	switch (action.type) {
 		case TYPES.ADD_MESSAGE:
-			if ( ! action.status ) {
+			if (!action.status) {
 				action.status = 'info';
 			}
 			return {
 				...state,
 				messages: {
 					...state.messages,
-					[ action.source ]: {
+					[action.source]: {
 						message: action.message,
 						status: action.status,
 					},
@@ -30,7 +30,7 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			};
 		case TYPES.REMOVE_MESSAGE:
 			const messages = { ...state.messages };
-			delete messages[ action.source ];
+			delete messages[action.source];
 			return {
 				...state,
 				messages,
@@ -44,16 +44,16 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				currentlyRunning: {
-					...state,
-					[ action.command ]: true,
+					...state.currentlyRunning,
+					[action.command]: true,
 				},
 			};
 		case TYPES.REMOVE_CURRENTLY_RUNNING:
 			return {
 				...state,
 				currentlyRunning: {
-					...state,
-					[ action.command ]: false,
+					...state.currentlyRunning,
+					[action.command]: false,
 				},
 			};
 		case TYPES.SET_CRON_JOBS:
@@ -65,7 +65,7 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				params: {
-					[ action.source ]: action.params,
+					[action.source]: action.params,
 				},
 			};
 		default:
