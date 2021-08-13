@@ -14,4 +14,3 @@ add_action( 'admin_menu', function() {
 add_action( 'wp_loaded', function() {
 	require( 'api/api.php' );
 } );
-// add_filter( 'woocommerce_admin_disabled', '__return_true' );

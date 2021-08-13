@@ -187,14 +187,18 @@ export function* runSelectedCronJob(params) {
 
 export function* runWCComToggle(params) {
 	yield runCommand('Toggle overwriting woocommerce.com url', function* () {
-		yield apiFetch({
+		const response = yield apiFetch({
 			path: API_NAMESPACE + '/tools/toggle-wccom-url-overwrite/v1',
 			method: 'POST',
 			data: params,
 		});
-		yield dispatch(OPTIONS_STORE_KEY).invalidateResolutionForStoreSelector(
-			'getOption'
-		);
+		if (response && response.success) {
+			const { option_value, option_name } = response;
+			yield dispatch(OPTIONS_STORE_KEY).setOption({
+				option_value,
+				option_name,
+			});
+		}
 	});
 }
 

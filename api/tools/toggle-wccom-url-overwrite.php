@@ -30,7 +30,15 @@ possibly_add_overwrite_woocommerce_com_url_filter();
 function tools_trigger_toggle_wccom_url_overwrite()
 {
 	$enabled = get_option( ENABLE_WCCOM_URL_OVERWRITE_OPTION, 'no' );
-	update_option( ENABLE_WCCOM_URL_OVERWRITE_OPTION, $enabled === 'no' ? 'yes' : 'no' );
-	possibly_add_overwrite_woocommerce_com_url_filter();
-	return ! $enabled;
+	// Toggle enabled.
+	$enabled = $enabled === 'no' ? 'yes' : 'no';
+	$updated = update_option( ENABLE_WCCOM_URL_OVERWRITE_OPTION, $enabled );
+	if ( $updated ) {
+		possibly_add_overwrite_woocommerce_com_url_filter();
+	}
+	return new WP_REST_Response(array(
+		'success' => $updated,
+		'option_name' => ENABLE_WCCOM_URL_OVERWRITE_OPTION,
+		'option_value' => $enabled
+	), 200);
 }

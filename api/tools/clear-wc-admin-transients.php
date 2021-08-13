@@ -22,10 +22,10 @@ register_woocommerce_admin_test_helper_rest_route(
 );
 
 const transient_list = array(
-    array(
-  	  'title' => 'Remote free extensions specs',
-	  'name' => 'woocommerce_admin_remote_free_extensions_specs',
-    ),
+	array(
+		'title' => 'Remote free extensions specs',
+		'name' => 'woocommerce_admin_remote_free_extensions_specs',
+	),
 	array(
 		'title' => 'Payment gateway suggestion specs',
 		'name' => 'woocommerce_admin_payment_gateway_suggestions_specs',

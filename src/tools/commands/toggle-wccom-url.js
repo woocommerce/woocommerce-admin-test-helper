@@ -19,24 +19,22 @@ const WCCOM_URL_OVERWRITE_OPTION = 'wc_test_helper_wccom_url_ovewrite';
 
 export const ToggleWCComUrl = () => {
 	const { saveOption } = useDispatch(OPTIONS_STORE_KEY);
-	const { enabled, url, loading, updating } = useSelect((select) => {
-		const { getOption, isLoading, hasFinishedResolution } =
-			select(OPTIONS_STORE_KEY);
+	const { enabled, url, isLoading, updating } = useSelect((select) => {
+		const { getOption, isLoading } = select(OPTIONS_STORE_KEY);
 		const { getCurrentlyRunning } = select(STORE_KEY);
 		const currentlyRunning = getCurrentlyRunning();
 		return {
 			enabled: getOption(ENABLE_WCCOM_URL_OVERWRITE_OPTION),
 			url: getOption(WCCOM_URL_OVERWRITE_OPTION),
 			updating:
-				!hasFinishedResolution('getOption', [
-					ENABLE_WCCOM_URL_OVERWRITE_OPTION,
-				]) ||
-				(currentlyRunning &&
-					currentlyRunning['Toggle overwriting woocommerce.com url']),
+				currentlyRunning &&
+				currentlyRunning['Toggle overwriting woocommerce.com url'],
 			isLoading: isLoading(),
 		};
 	});
+
 	const [wcUrl, setWcUrl] = useState('');
+
 	useEffect(() => {
 		setWcUrl(url || 'http://woocommerce.test');
 	}, [url]);
@@ -55,10 +53,11 @@ export const ToggleWCComUrl = () => {
 		}
 	}, [wcUrl]);
 
+	console.log(isLoading, enabled);
 	return (
 		<div className="toggle-wccom-url">
-			{loading || updating ? (
-				<p>{loading || !enabled ? 'Loading' : 'Updating'}...</p>
+			{isLoading || updating ? (
+				<p>{isLoading || !enabled ? 'Loading' : 'Updating'}...</p>
 			) : (
 				<>
 					<InputControl
