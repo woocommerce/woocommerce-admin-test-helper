@@ -52,4 +52,9 @@ export default [
 		description: <DisableEmail />,
 		action: 'runDisableEmail',
 	},
+	{
+		command: 'Update datasource poller',
+		description: 'Update datasource poller',
+		action: 'updateDataSourcePoller',
+	},
 ];

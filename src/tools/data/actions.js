@@ -189,6 +189,26 @@ export function* runDisableEmail() {
 			path: `${API_NAMESPACE}/tools/toggle-emails/v1`,
 			method: 'POST',
 		});
-		yield setIsEmailDisabled( response );
+		yield setIsEmailDisabled(response);
+	});
+}
+
+export function* updateDataSourcePoller() {
+	yield runCommand('Update data source poller', function* () {
+		// eslint-disable-next-line no-alert
+		let dataSourceURL = window.prompt(
+			'Please enter a URL to use instead of https://woocommerce.com'
+		);
+		if (dataSourceURL !== null) {
+			const isValidProtocolPattern = /^((http|https):\/\/)/;
+			if (!isValidProtocolPattern.test(dataSourceURL)) {
+				dataSourceURL = `http://${dataSourceURL.split('?')[0]}`;
+			}
+			yield apiFetch({
+				path: `${API_NAMESPACE}/tools/update-data-source-poller/v1`,
+				method: 'POST',
+				data: { dataSourceURL },
+			});
+		}
 	});
 }
