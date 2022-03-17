@@ -34,7 +34,7 @@ function getExperimentsFromFrontend() {
 export function* getExperiments() {
 	try {
 		const response = yield apiFetch( {
-			path: `${ API_NAMESPACE }/options?search=_transient_abtest_variation_`,
+			path: `${ API_NAMESPACE }/experiments/backend`,
 		} );
 
 		const experimentsFromBackend = response.map( ( experiment ) => {
