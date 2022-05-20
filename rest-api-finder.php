@@ -1,21 +1,16 @@
 <?php
 /**
- * Plugin Name: WooCommerce Admin Test Helper
- * Plugin URI: https://github.com/woocommerce/woocommerce-admin-test-helper
- * Description: A helper plugin to assist with testing WooCommerce Admin
- * Author: WooCommerce
- * Author URI: https://woocommerce.com/
- * Version: 0.7.3
- *
- * @package WooCommerce\Admin\TestHelper
+ * Plugin Name: WordPress Rest API Finder
+ * Author: Moon
+ * Version: 0.0.1
  */
 
-define( 'WC_ADMIN_TEST_HELPER_PLUGIN_FILE', 'woocommerce-admin-test-helper/woocommerce-admin-test-helper.php' );
+define( 'WP_REST_API_FINDER_PLUGIN_FILE', 'rest-api-finder/rest-api-finder' );
 
 /**
  * Register the JS.
  */
-function add_extension_register_script() {
+function rest_api_finder_add_extension_register_script() {
 	$script_path       = '/build/index.js';
 	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
 	$script_asset      = file_exists( $script_asset_path )
@@ -24,25 +19,25 @@ function add_extension_register_script() {
 	$script_url = plugins_url( $script_path, __FILE__ );
 
 	wp_register_script(
-		'woocommerce-admin-test-helper',
+		'wp-rest-api-finder',
 		$script_url,
 		$script_asset['dependencies'],
 		$script_asset['version'],
 		true
 	);
-	wp_enqueue_script( 'woocommerce-admin-test-helper' );
+	wp_enqueue_script( 'wp-rest-api-finder' );
 
 	$css_file_version = filemtime( dirname( __FILE__ ) . '/build/index.css' );
 
 	wp_register_style(
 		'wp-components',
-		plugins_url( 'dist/components/style.css', WC_ADMIN_TEST_HELPER_PLUGIN_FILE ),
+		plugins_url( 'dist/components/style.css', WP_REST_API_FINDER_PLUGIN_FILE ),
 		array(),
 		$css_file_version
 	);
 
 	wp_register_style(
-		'woocommerce-admin-test-helper',
+		'wp-rest-api-finder',
 		plugins_url( '/build/index.css', __FILE__ ),
 		// Add any dependencies styles may have, such as wp-components.
 		array(
@@ -51,7 +46,7 @@ function add_extension_register_script() {
 		$css_file_version
 	);
 
-	wp_enqueue_style( 'woocommerce-admin-test-helper' );
+	wp_enqueue_style( 'wp-rest-api-finder' );
 }
 
 add_action( 'plugins_loaded', function() {
@@ -59,7 +54,7 @@ add_action( 'plugins_loaded', function() {
 		return;
 	}
 	
-	add_action( 'admin_enqueue_scripts', 'add_extension_register_script' );
+	add_action( 'admin_enqueue_scripts', 'rest_api_finder_add_extension_register_script' );
 
 	// Load the plugin
 	require( 'plugin.php' );
